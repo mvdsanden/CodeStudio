@@ -1,0 +1,9 @@
+#include "csnode.ih"
+
+void CSNode::destroy()
+{
+
+  // Put your destruction code here...
+
+}
+

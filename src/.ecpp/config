@@ -6,4 +6,4 @@
   <dependencies/>
   <git use="false"/>
   <svn use="false"/>
-<classes><class name="EventSlot" path="/EventSlot/.ecpp_class"/><class name="EventHandler" path="/EventHandler/.ecpp_class"/><class name="MemberHandler" path="/MemberHandler/.ecpp_class"/><class name="FunctionHandler" path="/FunctionHandler/.ecpp_class"/></classes></ecpp-project>
+<classes><class name="EventSlot" path="/EventSlot/.ecpp_class"/><class name="EventHandler" path="/EventHandler/.ecpp_class"/><class name="MemberHandler" path="/MemberHandler/.ecpp_class"/><class name="FunctionHandler" path="/FunctionHandler/.ecpp_class"/><class name="CSCom" path="/CSCom/.ecpp_class"/><class name="CSNode" path="/CSNode/.ecpp_class"/></classes></ecpp-project>

@@ -1,0 +1,60 @@
+#ifndef __INC_MVDS_CSNODE_HH__
+#define __INC_MVDS_CSNODE_HH__
+
+namespace mvds {
+
+
+  /**
+   *
+   *
+   */
+  class CSNode {
+
+    void copy(CSNode const &other);
+    void destroy();
+
+  public:
+
+    CSNode();
+
+    ~CSNode();
+
+    CSNode(CSNode const &other);
+
+    CSNode &operator=(CSNode const &other);
+
+
+    // Add your public member functions here...
+
+
+  private:
+
+    // Add your private members...
+
+  };
+
+  inline CSNode::~CSNode()
+  {
+    destroy();
+  }
+
+  inline CSNode CSNode::CSNode(CSNode const &other)
+  {
+    copy(other);
+  }
+
+  inline CSNode &CSNode::operator=(CSNode const &other)
+  {
+    if (this != &other) {
+      destroy();
+      copy(other);
+    }
+    return *this;
+  }
+
+
+};
+
+
+#endif // __INC_MVDS_CSNODE_HH__
+
