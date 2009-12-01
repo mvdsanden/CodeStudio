@@ -1,0 +1,52 @@
+
+EventHandler/eventhandler.hh,141
+#define __INC_MVDS_EVENTHANDLER_HH____INC_MVDS_EVENTHANDLER_HH__2,37
+namespace mvds {mvds4,75
+  class EventHandler {EventHandler14,252
+
+EventHandler/eventhandler.cc,0
+
+EventHandler/copy.cc,61
+void EventHandler::copy(EventHandler const &other)copy3,28
+
+EventHandler/destroy.cc,42
+void EventHandler::destroy()destroy3,28
+
+EventHandler/create.cc,78
+EventHandler<Args> *create(void (Obj::*fptr)(Args...), Obj *obj)create6,116
+
+EventSlot/eventslot.hh,455
+#define __INC_MVDS_EVENTSLOT_HH____INC_MVDS_EVENTSLOT_HH__2,34
+namespace mvds {mvds4,69
+  class EventSlot {EventSlot13,198
+    std::list<EventHandler<Args>*> d_handlers;d_handlers40,656
+  void EventSlot<Args>::EventSlot()EventSlot45,740
+  inline EventSlot<Args>::~EventSlot()~EventSlot54,860
+  inline void EventSlot<Args>::connect(EventHandler<Args> *handler)connect62,1049
+  inline void EventSlot<Args>::signal(Args... args)signal68,1191
+
+EventSlot/eventslot.cc,43
+void EventSlot::EventSlot()EventSlot3,25
+
+EventSlot/copy.cc,55
+void EventSlot::copy(EventSlot const &other)copy3,25
+
+EventSlot/destroy.cc,39
+void EventSlot::destroy()destroy3,25
+
+MemberHandler/memberhandler.hh,328
+#define __INC_MVDS_MEMBERHANDLER_HH____INC_MVDS_MEMBERHANDLER_HH__2,38
+namespace mvds {mvds6,121
+  class MemberHandler : public EventHandler {MemberHandler14,282
+    void (Obj::*d_fptr)(Args...);d_fptr30,589
+    Obj *d_obj;d_obj31,623
+  inline void MemberHandler<Args,Obj>::operator()(Args... args)operator ()36,690
+
+MemberHandler/memberhandler.cc,101
+void MemberHandler<Args,Obj>::MemberHandler(void (Obj::*fptr)(Args...), Obj *obj)MemberHandler4,71
+
+MemberHandler/copy.cc,63
+void MemberHandler::copy(MemberHandler const &other)copy3,29
+
+MemberHandler/destroy.cc,43
+void MemberHandler::destroy()destroy3,29

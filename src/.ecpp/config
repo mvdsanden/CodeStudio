@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ecpp-project name="CodeStudio" namespace="mvds">
+  <namespaces>
+    <ns name="mvds"/>
+  </namespaces>
+  <dependencies/>
+  <git use="false"/>
+  <svn use="false"/>
+<classes><class name="EventSlot" path="/EventSlot/.ecpp_class"/><class name="EventHandler" path="/EventHandler/.ecpp_class"/><class name="MemberHandler" path="/MemberHandler/.ecpp_class"/><class name="FunctionHandler" path="/FunctionHandler/.ecpp_class"/></classes></ecpp-project>
