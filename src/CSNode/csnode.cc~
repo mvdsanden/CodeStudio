@@ -1,9 +1,0 @@
-#include "csnode.ih"
-
-void CSNode::CSNode()
-{
-
-  // Put your construction code here...
-
-}
-

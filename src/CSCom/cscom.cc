@@ -1,6 +1,6 @@
 #include "cscom.ih"
 
-void CSCom::CSCom()
+CSCom::CSCom()
 {
 
   // Put your construction code here...

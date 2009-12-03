@@ -4,6 +4,10 @@
 #include "../MutexLock/mutexlock.hh"
 #include "../EventSlot/eventslot.hh"
 
+#include <string>
+#include <map>
+#include <list>
+
 namespace mvds {
 
   class CSNode;
@@ -50,7 +54,7 @@ namespace mvds {
 	/**
 	 *  Adds a node to the children.
 	 */
-	void append(CSNode *node);
+	CSNode *append(CSNode *node);
 
 	/**
 	 *  Erases node from the children list.
@@ -87,7 +91,7 @@ namespace mvds {
 	/**
 	 *  @returns the value of the attribute with name.
 	 */
-	std::string const &attribute(std::string const &name) const;
+	std::string attributeValue(std::string const &name) const;
 
 	/**
 	 *  Sets attribute name to node value.
@@ -153,13 +157,15 @@ namespace mvds {
 	 */
 	EventSlot<CSNode*> &onDeactivate() { return d_onDeactivate; }
 
+	void print(std::ostream &stream, bool recursive = true) const;
+
   private:
 
     // Add your private members...
 
 	std::string  d_name;
 	std::string  d_value;
-	bool         d_active = false;
+	bool         d_active;
 	MutexLock    d_mutex;
 
 	CSNode      *d_parent;
@@ -177,10 +183,11 @@ namespace mvds {
 
   };
 
-  inline void CSNode::append(CSNode *node)
+  inline CSNode *CSNode::append(CSNode *node)
   {
 	d_children.push_back(node);
 	d_onChange.signal(this);
+	return node;
   }
 
   inline void CSNode::remove(CSNode *node)
@@ -201,7 +208,7 @@ namespace mvds {
 	return (i == d_attributes.end()?0:(*i).second);
   }
 
-  inline std::string const &CSNode::attribute(std::string const &name) const
+  inline std::string CSNode::attributeValue(std::string const &name) const
   {
 	CSAttributes::const_iterator i = d_attributes.find(name);
 	return (i == d_attributes.end()?0:(*i).second->value());
@@ -211,7 +218,7 @@ namespace mvds {
   {
 	CSAttributes::iterator i = d_attributes.find(name);
 
-	if (i != d_attributes.end() && (*i).second.parent() == this)
+	if (i != d_attributes.end() && (*i).second->parent() == this)
 	  delete (*i).second;
 
 	d_attributes[name] = value;

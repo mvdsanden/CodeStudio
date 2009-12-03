@@ -1,6 +1,8 @@
 #ifndef __INC_MVDS_CSCOM_HH__
 #define __INC_MVDS_CSCOM_HH__
 
+#include "../CSNode/csnode.hh"
+
 namespace mvds {
 
 
@@ -13,23 +15,37 @@ namespace mvds {
     void copy(CSCom const &other);
     void destroy();
 
+    CSCom(CSCom const &other); // NI
+
+    CSCom &operator=(CSCom const &other); // NI
+
   public:
 
     CSCom();
 
     ~CSCom();
 
-    CSCom(CSCom const &other);
-
-    CSCom &operator=(CSCom const &other);
-
-
     // Add your public member functions here...
 
+	/**
+	 *  Add a named node to the global directory.
+	 */
+	void appendNamedNode(CSNode *node);
+
+	/**
+	 *  Load a XML.
+	 */
+	CSNode *loadXML(std::string const &filename, std::string const &name);
 
   private:
 
     // Add your private members...
+
+	CSAttributes d_namedNodes;
+
+	void parseWarning(std::string text);
+	void parseError(std::string text);
+	void parseFatal(std::string text);
 
   };
 
@@ -38,20 +54,10 @@ namespace mvds {
     destroy();
   }
 
-  inline CSCom CSCom::CSCom(CSCom const &other)
+  inline void CSCom::appendNamedNode(CSNode *node)
   {
-    copy(other);
+	d_namedNodes[node->name()] = node;
   }
-
-  inline CSCom &CSCom::operator=(CSCom const &other)
-  {
-    if (this != &other) {
-      destroy();
-      copy(other);
-    }
-    return *this;
-  }
-
 
 };
 
