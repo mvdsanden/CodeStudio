@@ -12,7 +12,7 @@ namespace mvds {
 
 
   /**
-   *
+   *  The GTK GUI Main.
    *
    */
   class CSNGtkMain : public CSNode, public Thread {
@@ -26,7 +26,7 @@ namespace mvds {
 
   public:
 
-    CSNGtkMain(CSNode *parent, std::string const &name = "gtk");
+    CSNGtkMain(CSNode *parent, std::string const &name = "gui");
 
     ~CSNGtkMain();
 
@@ -34,7 +34,7 @@ namespace mvds {
 
     virtual int main();
 
-    void setTitle(std::string title);
+    void setTitle(std::string const &title);
 
   private:
 
@@ -45,6 +45,11 @@ namespace mvds {
 
     void changed(CSNode *node);
 
+    void titleChanged(CSNode *node)  { d_window->set_title(node->value()); }
+    void widthChanged(CSNode *node)  { d_window->resize(atof(node->value().c_str()),d_window->get_height()); }
+    void heightChanged(CSNode *node) { d_window->resize(d_window->get_width(),atof(node->value().c_str())); }
+
+    void appendedChild(CSNode *node, CSNode *child);
   };
 
   inline CSNGtkMain::~CSNGtkMain()
@@ -52,8 +57,9 @@ namespace mvds {
     destroy();
   }
 
-  inline void CSNGtkMain::setTitle(std::string title)
+  inline void CSNGtkMain::setTitle(std::string const &title)
   {
+    attribute("title")->setValue(title);
     d_window->set_title(title);
   }
 

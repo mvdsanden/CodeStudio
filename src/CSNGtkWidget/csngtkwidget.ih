@@ -1,0 +1,8 @@
+#include "csngtkwidget.hh"
+
+#include <stdexcept>
+
+using namespace std;
+using namespace mvds;
+
+

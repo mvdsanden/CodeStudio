@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "../CSNGtkMain/csngtkmain.hh"
+#include "../CSNGtkLabel/csngtklabel.hh"
 
 #include "../MemberHandler/memberhandler.hh"
 #include "../FunctionHandler/functionhandler.hh"
@@ -40,9 +41,13 @@ int main()
 
   root.print(cout);
 
+  gtk->append(new CSNGtkLabel(gtk,"Label0"));
+
   sleep(1);
 
-  gtk->setAttribute("title","Test");
+  gtk->attribute("title")->setValue("Test");
+  gtk->attribute("width")->setValue("800");
+  gtk->attribute("height")->setValue("600");
 
   static_cast<CSNGtkMain*>(gtk)->join();
 

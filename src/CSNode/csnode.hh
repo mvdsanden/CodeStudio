@@ -4,6 +4,8 @@
 #include "../MutexLock/mutexlock.hh"
 #include "../EventSlot/eventslot.hh"
 
+#include "../MemberHandler/memberhandler.hh"
+
 #include <string>
 #include <map>
 #include <list>
@@ -89,6 +91,11 @@ namespace mvds {
     CSNode const *attribute(std::string const &name) const;
 
     /**
+     *  @returns the node of the attribute with name.
+     */
+    CSNode *attribute(std::string const &name);
+
+    /**
      *  @returns the value of the attribute with name.
      */
     std::string attributeValue(std::string const &name) const;
@@ -167,6 +174,11 @@ namespace mvds {
      */
     EventSlot<CSNode*,CSNode*> &onRemoveChild() { return d_onAppendChild; }
 
+    /**
+     *  Triggered if one of the node's attributes is changed.
+     */
+    EventSlot<CSNode*,CSNode*> &onAttrChange() { return d_onAttrChange; }
+
     void print(std::ostream &stream, bool recursive = true) const;
 
   private:
@@ -192,6 +204,12 @@ namespace mvds {
     EventSlot<CSNode*> d_onDeactivate;
     EventSlot<CSNode*,CSNode*> d_onAppendChild;
     EventSlot<CSNode*,CSNode*> d_onRemoveChild;
+    EventSlot<CSNode*,CSNode*> d_onAttrChange;
+
+    // Event handlers
+    void attributeChanged(CSNode *node)
+    { d_onAttrChange.signal(this,node);
+      d_onChange.signal(this); }
 
   };
 
@@ -222,6 +240,12 @@ namespace mvds {
     return (i == d_attributes.end()?0:(*i).second);
   }
 
+  inline CSNode *CSNode::attribute(std::string const &name)
+  {
+    CSAttributes::iterator i = d_attributes.find(name);
+    return (i == d_attributes.end()?0:(*i).second);
+  }
+
   inline std::string CSNode::attributeValue(std::string const &name) const
   {
     CSAttributes::const_iterator i = d_attributes.find(name);
@@ -235,15 +259,18 @@ namespace mvds {
     if (i != d_attributes.end() && (*i).second->parent() == this)
       delete (*i).second;
 
+    value->onChange().connect(call<CSNode*>(&CSNode::attributeChanged,*this));
+
     d_attributes[name] = value;
 
-    d_onChange.signal(this);
+    // Chould be a bit more efficient.
+    attributeChanged(d_attributes[name]);
   }
 
   inline void CSNode::setAttribute(std::string const &name,
 				   std::string const &value)
   {
-    setAttribute(name,new CSNode(this,"",value));
+    setAttribute(name,new CSNode(this,name,value));
   }
 
   inline void CSNode::setActive(bool active)
