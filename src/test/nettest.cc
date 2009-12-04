@@ -4,7 +4,7 @@ using namespace std;
 
 template <typename Type>
 struct TypeInfo {
-  static const uint26_t version = 0x0001; // Net type version.
+  static const uint16_t version = 0x0001; // Net type version.
 };
 
 template <> struct TypeInfo<int> { static const char type = 'i'; };

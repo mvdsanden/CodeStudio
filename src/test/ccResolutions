@@ -28,3 +28,5 @@ libxml++/libxml++.h	`pkg-config libxml++-2.6 --cflags --libs`
 ecpp/arglist/arglist.hh	-lecpp-common
 ecpp/path/path.hh	-lecpp-filesystem
 ecpp/string/string.hh	-lecpp-common
+gtkmm.h			`pkg-config gtkmm-2.4 --cflags --libs`
+tuple			

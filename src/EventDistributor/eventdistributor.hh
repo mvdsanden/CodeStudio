@@ -1,0 +1,24 @@
+#ifndef __INC_MVDS_EVENTDISTRIBUTOR_HH__
+#define __INC_MVDS_EVENTDISTRIBUTOR_HH__
+
+#include "../EventHandler/eventhandler.hh"
+
+namespace mvds {
+
+
+  /**
+   *
+   *
+   */
+  class EventDistributor {
+  public:
+
+    virtual void distribute(EventHandler<> *event) = 0;
+
+  };
+
+};
+
+
+#endif // __INC_MVDS_EVENTDISTRIBUTOR_HH__
+

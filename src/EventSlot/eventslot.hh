@@ -23,7 +23,7 @@ namespace mvds {
 
     EventSlot();
 
-    ~EventSlot();
+    virtual ~EventSlot();
 
     // Add your public member functions here...
 
@@ -35,9 +35,9 @@ namespace mvds {
     /**
      *  Signal the event slot.
      */
-    void signal(Args... args);
+    virtual void signal(Args... args);
 
-  private:
+  protected:
 
     // Add your private members...
 
