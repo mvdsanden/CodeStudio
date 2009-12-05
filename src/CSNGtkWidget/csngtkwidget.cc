@@ -1,9 +1,15 @@
 #include "csngtkwidget.ih"
 
+#include "../DeferedCall/deferedcall.hh"
+
+#include <iostream>
+
 CSNGtkWidget::CSNGtkWidget(CSNode *parent, std::string const &name)
   : CSNode(parent,name),
     d_main(0)
 {
+
+  setAttribute("nodeType","GtkWidget");
 
   // Find gtk gui main
   for (CSNode *p = parent; p; p = p->parent()) {
@@ -23,6 +29,9 @@ CSNGtkWidget::CSNGtkWidget(CSNode *parent, std::string const &name)
 
   // Connect load event
   onLoad().connect(call<>(&CSNGtkWidget::loaded,*this));
+
+  cerr << "Distributing load!" << endl;
+  d_main->distributor()->distribute(call<CSNode*>(&CSNGtkWidget::loaded,*this,this));
 
 }
 

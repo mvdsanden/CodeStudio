@@ -25,23 +25,25 @@ void change(CSNode *node)
 
 int main()
 {
-  CSNode root(0,"root");
+  //  CSNode root(0,"root");
 
-  CSNode *gtk = root.append(new CSNGtkMain(&root));
+  CSNode *gtk = new CSNGtkMain(0);
 
-  root.append(new CSNode(&root));
-  CSNode *n = root.append(new CSNode(&root,"n"));
-  n->onChange().connect(call<CSNode*>(change));
-  root.append(new CSNode(&root));
+  //  CSNode *gtk = root.append(new CSNGtkMain(&root));
 
-  n->setAttribute("Test","Bla");
+  //  root.append(new CSNode(&root));
+  //  CSNode *n = root.append(new CSNode(&root,"n"));
+  //  n->onChange().connect(call<CSNode*>(change));
+  //  root.append(new CSNode(&root));
 
-  n->append(new CSNode(n,"Hoi","Hallo"));
-  n->onUnload().connect(call<CSNode*>(unload));
+  //  n->setAttribute("Test","Bla");
 
-  root.print(cout);
+  //  n->append(new CSNode(n,"Hoi","Hallo"));
+  //  n->onUnload().connect(call<CSNode*>(unload));
 
-  gtk->append(new CSNGtkLabel(gtk,"Label0"));
+  //  root.print(cout);
+
+  //  gtk->append(new CSNGtkLabel(gtk,"Label0"));
 
   sleep(1);
 
@@ -50,6 +52,8 @@ int main()
   gtk->attribute("height")->setValue("600");
 
   static_cast<CSNGtkMain*>(gtk)->join();
+
+  delete gtk;
 
   return 0;
 }

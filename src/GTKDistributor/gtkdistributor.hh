@@ -7,6 +7,7 @@
 
 #include <gtkmm.h>
 #include <queue>
+#include <iostream>
 
 namespace mvds {
 
@@ -16,6 +17,8 @@ namespace mvds {
    *
    */
   class GTKDistributor : public EventDistributor {
+
+    friend class CSNGtkMain;
 
     void destroy();
 
@@ -33,6 +36,9 @@ namespace mvds {
 
   private:
 
+    // Should be run from the GTK thread!
+    void initialize();
+
     // Add your private members...
 
     Socket::Pair d_socketPair;
@@ -47,6 +53,7 @@ namespace mvds {
     // Queue the event.
     d_mutex.lock();
     {
+      std::cerr << "Pushing event " << event << std::endl;
       d_queue.push(event);
     }
     d_mutex.unlock();

@@ -1,5 +1,7 @@
 #include "csnode.ih"
 
+#include <iostream>
+
 void CSNode::destroy()
 {
   // Put your destruction code here...
@@ -8,9 +10,12 @@ void CSNode::destroy()
 
   // Delete all children that have this node as their parent.
   for (CSNodeList::iterator i = d_children.begin();
-	   i != d_children.end(); ++i)
-	if ((*i)->parent() == this)
-	  delete *i;
+       i != d_children.end(); ++i) {
+    cerr << name() << " deletes " << (*i)->name() << endl;
+
+    if ((*i)->parent() == this)
+      delete *i;
+  }
 
   // Clear the list.
   d_children.clear();

@@ -36,6 +36,8 @@ namespace mvds {
 
     void setTitle(std::string const &title);
 
+    EventDistributor *distributor() { return d_distributor; }
+
   private:
 
     // Add your private members...

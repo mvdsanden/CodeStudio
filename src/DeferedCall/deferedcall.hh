@@ -24,6 +24,8 @@ namespace mvds {
     {
     }
 
+    virtual ~DeferedCall() { delete d_handler; }
+
     virtual void operator()();
     //    {
     //      (*d_handler)(d_args);

@@ -10,6 +10,8 @@
 #include <map>
 #include <list>
 
+#include <iostream>
+
 namespace mvds {
 
   class CSNode;
@@ -216,6 +218,7 @@ namespace mvds {
   inline CSNode *CSNode::append(CSNode *node)
   {
     d_children.push_back(node);
+    std::cerr << name() << ": Distributing append widget" << std::endl;
     d_onAppendChild.signal(this,node);
     d_onChange.signal(this);
     return node;

@@ -10,6 +10,7 @@ bool GTKDistributor::onSignal(Glib::IOCondition condition)
   {
 
     while (!d_queue.empty()) {
+      cerr << "Executing event: " << d_queue.front() << endl;
       (*d_queue.front())();
       delete d_queue.front();
       d_queue.pop();
