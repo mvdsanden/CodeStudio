@@ -4,8 +4,8 @@
 
 #include <iostream>
 
-CSNGtkWidget::CSNGtkWidget(CSNode *parent, std::string const &name)
-  : CSNode(parent,name),
+CSNGtkWidget::CSNGtkWidget(CSNode *parent, std::string const &name, std::string const &value)
+  : CSNode(parent,name,value),
     d_main(0)
 {
 
@@ -25,7 +25,7 @@ CSNGtkWidget::CSNGtkWidget(CSNode *parent, std::string const &name)
   }
 
   if (!d_main)
-    throw runtime_error("should be in a subtree of gtk main");
+    throw runtime_error("widgets should be in a subtree of gui");
 
   // Connect load event
   onLoad().connect(call<>(&CSNGtkWidget::loaded,*this));

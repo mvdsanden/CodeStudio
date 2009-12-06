@@ -18,7 +18,7 @@ namespace mvds {
 
   public:
 
-    CSNGtkWidget(CSNode *parent, std::string const &name);
+    CSNGtkWidget(CSNode *parent, std::string const &name, std::string const &value = "");
 
     ~CSNGtkWidget();
 
@@ -30,11 +30,11 @@ namespace mvds {
 
     virtual void loaded(CSNode *node) = 0;
 
+    CSNGtkMain *d_main;
+
   private:
 
     // Add your private members...
-
-    CSNGtkMain *d_main;
 
   };
 

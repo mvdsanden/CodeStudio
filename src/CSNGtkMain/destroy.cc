@@ -2,7 +2,6 @@
 
 void CSNGtkMain::destroy()
 {
-
   // Put your destruction code here...
 
   if (d_distributor) {

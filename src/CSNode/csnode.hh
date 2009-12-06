@@ -10,7 +10,7 @@
 #include <map>
 #include <list>
 
-#include <iostream>
+//#include <iostream>
 
 namespace mvds {
 
@@ -40,7 +40,7 @@ namespace mvds {
      */
     CSNode(CSNode *parent, std::string const &name = "", std::string const &value = "");
 
-    ~CSNode() { destroy(); }
+    virtual ~CSNode() { destroy(); }
 
 
     // Add your public member functions here...
@@ -218,7 +218,6 @@ namespace mvds {
   inline CSNode *CSNode::append(CSNode *node)
   {
     d_children.push_back(node);
-    std::cerr << name() << ": Distributing append widget" << std::endl;
     d_onAppendChild.signal(this,node);
     d_onChange.signal(this);
     return node;

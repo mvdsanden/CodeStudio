@@ -17,7 +17,7 @@ namespace mvds {
 
   public:
 
-    CSNGtkLabel(CSNode *parent, std::string const &name);
+    CSNGtkLabel(CSNode *parent, std::string const &name, std::string const &value = "");
 
     ~CSNGtkLabel();
 

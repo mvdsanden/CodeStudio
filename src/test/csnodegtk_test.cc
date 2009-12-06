@@ -2,6 +2,7 @@
 
 #include "../CSNGtkMain/csngtkmain.hh"
 #include "../CSNGtkLabel/csngtklabel.hh"
+#include "../CSNGtkVBox/csngtkvbox.hh"
 
 #include "../MemberHandler/memberhandler.hh"
 #include "../FunctionHandler/functionhandler.hh"
@@ -25,11 +26,9 @@ void change(CSNode *node)
 
 int main()
 {
-  //  CSNode root(0,"root");
+  CSNode root(0,"root");
 
-  CSNode *gtk = new CSNGtkMain(0);
-
-  //  CSNode *gtk = root.append(new CSNGtkMain(&root));
+  CSNode *gtk = root.append(new CSNGtkMain(&root));
 
   //  root.append(new CSNode(&root));
   //  CSNode *n = root.append(new CSNode(&root,"n"));
@@ -41,19 +40,25 @@ int main()
   //  n->append(new CSNode(n,"Hoi","Hallo"));
   //  n->onUnload().connect(call<CSNode*>(unload));
 
-  //  root.print(cout);
+  root.print(cout);
 
-  //  gtk->append(new CSNGtkLabel(gtk,"Label0"));
+  CSNode *vbox0 = gtk->append(new CSNGtkVBox(gtk,"VBox0"));
+
+  CSNode *label0 = vbox0->append(new CSNGtkLabel(vbox0,"Label0","Label0"));
+  CSNode *label1 = vbox0->append(new CSNGtkLabel(vbox0,"Label1","Label1"));
+  CSNode *label2 = vbox0->append(new CSNGtkLabel(vbox0,"Label2","Label2"));
 
   sleep(1);
 
+  label0->setValue("test");
+  label1->setValue("hallo");
+  label2->setValue("En? Werkt het?");
+
   gtk->attribute("title")->setValue("Test");
-  gtk->attribute("width")->setValue("800");
   gtk->attribute("height")->setValue("600");
+  gtk->attribute("width")->setValue("800");
 
   static_cast<CSNGtkMain*>(gtk)->join();
-
-  delete gtk;
 
   return 0;
 }

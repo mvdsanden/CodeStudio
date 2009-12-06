@@ -7,7 +7,6 @@
 
 #include <gtkmm.h>
 #include <queue>
-#include <iostream>
 
 namespace mvds {
 
@@ -53,7 +52,6 @@ namespace mvds {
     // Queue the event.
     d_mutex.lock();
     {
-      std::cerr << "Pushing event " << event << std::endl;
       d_queue.push(event);
     }
     d_mutex.unlock();

@@ -13,6 +13,8 @@ void CSNGtkMain::appendedChild(CSNode *node, CSNode *child)
 
     d_window->add(*static_cast<CSNGtkWidget*>(child)->widget());
 
+    d_window->show_all_children();
+
   }
 
 }

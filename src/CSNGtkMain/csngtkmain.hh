@@ -28,7 +28,7 @@ namespace mvds {
 
     CSNGtkMain(CSNode *parent, std::string const &name = "gui");
 
-    ~CSNGtkMain();
+    virtual ~CSNGtkMain() { destroy(); }
 
     // Add your public member functions here...
 
@@ -53,11 +53,6 @@ namespace mvds {
 
     void appendedChild(CSNode *node, CSNode *child);
   };
-
-  inline CSNGtkMain::~CSNGtkMain()
-  {
-    destroy();
-  }
 
   inline void CSNGtkMain::setTitle(std::string const &title)
   {
