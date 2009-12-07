@@ -2,6 +2,7 @@
 #define __INC_MVDS_CSNGTKLABEL_HH__
 
 #include "../CSNGtkWidget/csngtkwidget.hh"
+#include "../Factory/factory.hh"
 
 namespace mvds {
 
@@ -16,6 +17,13 @@ namespace mvds {
     void destroy();
 
   public:
+
+    struct Fact : public Factory {
+      virtual CSNode *operator()(CSNode *parent, std::string const &name, std::string const &value) const
+      {
+	return new CSNGtkLabel(parent,name,value);
+      }
+    };
 
     CSNGtkLabel(CSNode *parent, std::string const &name, std::string const &value = "");
 

@@ -8,5 +8,16 @@
 
 </test>
 
+<gui width="800" height="600">
+
+  <vbox>
+
+    <label id="label0">Test1</label>
+    <label id="label1">Hallo</label>
+    <label>Werkt dit?</label>
+
+  </vbox>
+
+</gui>
 
 </cscom>

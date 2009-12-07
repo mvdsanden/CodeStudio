@@ -4,6 +4,8 @@
 #include "../CSNode/csnode.hh"
 #include "../EventSlot/eventslot.hh"
 
+#include "../CSCom/cscom.hh"
+
 #include <stdexcept>
 #include <libxml++/libxml++.h>
 
@@ -13,7 +15,7 @@ namespace mvds {
   {
   public:
 
-	CSComParser();
+	CSComParser(CSCom &cscom);
 
 	virtual ~CSComParser();
 
@@ -39,17 +41,21 @@ namespace mvds {
 
   private:
 
-	CSNode *d_root;
-	CSNode *d_current;
+    CSCom &d_cscom;
 
-	EventSlot<std::string> d_onWarning;
-	EventSlot<std::string> d_onError;
-	EventSlot<std::string> d_onFatal;
+    CSNode *d_root;
+    CSNode *d_current;
+
+    EventSlot<std::string> d_onWarning;
+    EventSlot<std::string> d_onError;
+    EventSlot<std::string> d_onFatal;
 
   };
 
-  inline CSComParser::CSComParser()
-	: d_root(0), d_current(0)
+  inline CSComParser::CSComParser(CSCom &cscom)
+    : d_cscom(cscom),
+      d_root(0),
+      d_current(0)
   {
   }
 

@@ -6,6 +6,8 @@
 
 #include "../EventDistributor/eventdistributor.hh"
 
+#include "../Factory/factory.hh"
+
 #include <gtkmm.h>
 
 namespace mvds {
@@ -25,6 +27,13 @@ namespace mvds {
     CSNGtkMain &operator=(CSNGtkMain const &other); // NI
 
   public:
+
+    struct Fact : public Factory {
+      virtual CSNode *operator()(CSNode *parent, std::string const &name, std::string const &value) const
+      {
+	return new CSNGtkMain(parent,name);
+      }
+    };
 
     CSNGtkMain(CSNode *parent, std::string const &name = "gui");
 

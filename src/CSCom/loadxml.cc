@@ -9,7 +9,7 @@
 
 CSNode *CSCom::loadXML(std::string const &filename, std::string const &name)
 {
-  CSComParser parser;
+  CSComParser parser(*this);
 
   parser.onWarning().connect(call<string>(&CSCom::parseWarning,*this));
   parser.onError().connect(call<string>(&CSCom::parseError,*this));

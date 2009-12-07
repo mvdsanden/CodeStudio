@@ -2,6 +2,7 @@
 #define __INC_MVDS_CSNGTKVBOX_HH__
 
 #include "../CSNGtkWidget/csngtkwidget.hh"
+#include "../Factory/factory.hh"
 
 namespace mvds {
 
@@ -15,6 +16,13 @@ namespace mvds {
     void destroy();
 
   public:
+
+    struct Fact : public Factory {
+      virtual CSNode *operator()(CSNode *parent, std::string const &name, std::string const &value) const
+      {
+	return new CSNGtkVBox(parent,name,value);
+      }
+    };
 
     CSNGtkVBox(CSNode *parent, std::string const &name, std::string const &value = "");
 

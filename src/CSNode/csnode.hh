@@ -133,6 +133,11 @@ namespace mvds {
     void setActive(bool active);
 
     /**
+     *  @returns a list of nodes with the tag, from the children of this node.
+     */
+    CSNodeList getNodesWithTag(std::string const &tag);
+
+    /**
      *  This is run once when a node is loaded.
      */
     void load() { d_onLoad.signal(this); }

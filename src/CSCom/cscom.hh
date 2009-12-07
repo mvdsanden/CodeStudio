@@ -2,6 +2,7 @@
 #define __INC_MVDS_CSCOM_HH__
 
 #include "../CSNode/csnode.hh"
+#include "../Factory/factory.hh"
 
 namespace mvds {
 
@@ -27,36 +28,50 @@ namespace mvds {
 
     // Add your public member functions here...
 
-	/**
-	 *  Add a named node to the global directory.
-	 */
-	void appendNamedNode(CSNode *node);
+    /**
+     *  Add a named node to the global directory.
+     */
+    void appendNamedNode(CSNode *node, std::string const &id);
 
-	/**
-	 *  Load a XML.
-	 */
-	CSNode *loadXML(std::string const &filename, std::string const &name);
+    /**
+     *  @returns the node with name id.
+     */
+    CSNode *getNodeWithID(std::string const &id);
+
+    /**
+     *  Load an XML.
+     */
+    CSNode *loadXML(std::string const &filename, std::string const &name);
+
+    /**
+     *  Register a factory for a new node type.
+     */
+    void registerNodeType(std::string const &name, Factory *factory);
+
+    /**
+     *  Creates a node of type.
+     */
+    CSNode *create(std::string const &type, CSNode *parent, std::string const &name, std::string const &value);
 
   private:
 
     // Add your private members...
 
-	CSAttributes d_namedNodes;
+    void unloadNamedNode(CSNode *node, std::string id);
 
-	void parseWarning(std::string text);
-	void parseError(std::string text);
-	void parseFatal(std::string text);
+    CSAttributes d_namedNodes;
+
+    void parseWarning(std::string text);
+    void parseError(std::string text);
+    void parseFatal(std::string text);
+
+    std::map<std::string,Factory *> d_factories;
 
   };
 
   inline CSCom::~CSCom()
   {
     destroy();
-  }
-
-  inline void CSCom::appendNamedNode(CSNode *node)
-  {
-	d_namedNodes[node->name()] = node;
   }
 
 };
